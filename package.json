@@ -1,0 +1,16 @@
+{
+  "name": "react-native-gzip-ios",
+  "description": "Decompression string for react-native",
+  "version": "0.1.0",
+  "main": "index.js",
+  "keywords": [
+    "react-native",
+    "react-component",
+    "ios",
+    "gzip"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "react-native": "*"
+  }
+}
