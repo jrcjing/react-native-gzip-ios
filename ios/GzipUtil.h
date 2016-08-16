@@ -1,17 +1,16 @@
 //
 //  GzipUtil.h
-//  xyqcbg2
+//  GzipUtil
 //
-//  Created by Lisa on 16/8/12.
-//  Copyright © 2016年 netease. All rights reserved.
+//  Created by Lisa on 16/8/16.
+//  Copyright © 2016年 Lisa. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
+#import "RCTBridgeModule.h"
+
 @interface GzipUtil : NSObject <RCTBridgeModule>
 
-+ (NSData *)gZipData:(NSData *)data;
-
-+ (NSString *)gZipString:(NSString *)string;
-
 @end
+

@@ -1,7 +1,9 @@
 'use strict'
 
-var NativeGZip = require('react-native').NativeModules.GzipUtil
+var React = require('react-native');
+var NativeModules = React.NativeModules;
+var GzipUtilIOS = NativeModules.GzipUtil;
 
-exports.gzipString = function gZipString (string) {
-  return NativeGZip.gZipString(string)
+exports.gZipString = function gZipString (string, callback) {
+  return GzipUtilIOS.gZipString(string, callback);
 }

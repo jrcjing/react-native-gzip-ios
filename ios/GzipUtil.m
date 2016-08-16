@@ -1,9 +1,9 @@
 //
 //  GzipUtil.m
-//  xyqcbg2
+//  GzipUtil
 //
-//  Created by Lisa on 16/8/12.
-//  Copyright © 2016年 netease. All rights reserved.
+//  Created by Lisa on 16/8/16.
+//  Copyright © 2016年 Lisa. All rights reserved.
 //
 
 #import "GzipUtil.h"
@@ -14,13 +14,21 @@ static int DefaltGzipLevel = -1;
 
 @implementation GzipUtil
 
-RCT_EXPORT_MODULE()
+@synthesize bridge = _bridge;
 
-RCT_REMAP_METHOD(gZipString, string: (NSString *) string){
+RCT_EXPORT_MODULE();
+
+RCT_EXPORT_METHOD(gZipString:(NSString *)string
+                  callback:(RCTResponseSenderBlock)callback)
+{
     NSData* data = [string dataUsingEncoding:NSUTF8StringEncoding];
     NSData *gzipData = [GzipUtil gZipData:data];
     NSData *gzipBase64Data = [gzipData base64EncodedDataWithOptions:0];
-    return [NSString stringWithUTF8String:[gzipBase64Data bytes]];
+    NSString *zipStr = [NSString stringWithUTF8String:[gzipBase64Data bytes]];
+    if(zipStr){
+        return callback(@[[NSNull null], zipStr]);
+    }
+    return callback(@[[NSString stringWithFormat:@"GZip failed: %@", string]]);
 }
 
 + (NSData *)gZipData:(NSData *)input{
@@ -69,6 +77,5 @@ RCT_REMAP_METHOD(gZipString, string: (NSString *) string){
     UInt8 *bytes = (UInt8 *)data.bytes;
     return (data.length >= 2 && bytes[0] == 0x1f && bytes[1] == 0x8b);
 }
-
 
 @end
